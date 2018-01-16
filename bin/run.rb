@@ -55,12 +55,24 @@ class Artist
 
 
   def self.find_or_create_by(name:)
+    sql = <<-SQL
+      SELECT * FROM artists WHERE Name = ?
+    SQL
+
+    result = DB[:conn].execute(sql, name)[0]
+
+    if result
+      result
+    else
+      self.create(name)
+    end
+
     # seach for name
     # if no result create
+
   end
 
 
-  def
 
 end
 
